@@ -1,0 +1,18 @@
+
+Assembly:
+objdump -D -Mintel /bin/getflag | grep "<main>:" -A 334 > /tmp/main.s
+objdump -D -Mintel /bin/getflag | grep "<ft_des>:" -A 92 > /tmp/ft_des.s
+
+Data section:
+objdump -s -j .rodata /bin/sdata
+
+Assembly no hex:
+objdump -D -Mintel --no-show-raw-insn /bin/getflag
+
+Open binary in hex mode:
+vim -b binary
+:%!xxd
+:do_stuff
+:%!xxd -r
+:wq
+
