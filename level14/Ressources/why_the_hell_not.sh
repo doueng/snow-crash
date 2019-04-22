@@ -187,7 +187,7 @@ echo                     >> /tmp/switchy
 
 # Execute vimscript on local copy of getflag
 
-vim -s /tmp/switchy /tmp/getflag00
+vim -s /tmp/switchy /tmp/getflag00 > /dev/null
 
 # Launch it
 for i in `echo {00..14}`
