@@ -12,7 +12,7 @@
 # -------: ---- ---- ---- ---- ---- ---- ---- --75  ----------------
 
 # Copy binary
-cp ~/level13 /tmp/lvl13
+cp /home/user/level13/level13 /tmp/lvl13
 
 # Create vimscript
 echo ":%!xxd"         > /tmp/vswap13
@@ -27,3 +27,4 @@ vim -s /tmp/vswap13 /tmp/lvl13
 
 # Launch it
 /tmp/lvl13
+

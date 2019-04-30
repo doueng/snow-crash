@@ -30,30 +30,42 @@
 #             Jumps to the part where it prints flag14
 
 # make a copy of getflag
+rm -rf /tmp/.getflag.swp
+rm -rf /tmp/getflag
+
 cp /bin/getflag /tmp/getflag
+chmod 777 /tmp/getflag
+
 
 # Prepare the vimscript to reverse conditions
 # convert to hex
-echo ":%!xxd"         > /tmp/switchy
-# line b1a: swap ja -> jne
-echo "/0000b10"      >> /tmp/switchy
-echo ":s/774c/754c/" >> /tmp/switchy
-# line b78: swap ja -> jne
-echo "/0000b70"      >> /tmp/switchy
-echo ":s/771b/751b/" >> /tmp/switchy
-# line ba5: swap jb -> je
-echo "/0000ba0"      >> /tmp/switchy
-echo ":s/82d4/84d4/" >> /tmp/switchy
-# line bbb: swap je -> jne
-echo "/0000bb0"      >> /tmp/switchy
-echo ":s/8424/8524/" >> /tmp/switchy
-# convert back to binary
-echo ":%!xxd -r"     >> /tmp/switchy
-echo ":wq"           >> /tmp/switchy
-echo                 >> /tmp/switchy
+if [ ! -s /tmp/switch14 ]
+then	
+	echo ":set nobackup"   > /tmp/switch14
+
+	echo ":%!xxd"         >> /tmp/switch14
+	# line b1a: swap ja -> jne
+	echo "/0000b10"       >> /tmp/switch14
+	echo ":s/774c/754c/"  >> /tmp/switch14
+	# line b78: swap ja -> jne
+	echo "/0000b70"       >> /tmp/switch14
+	echo ":s/771b/751b/"  >> /tmp/switch14
+	# line ba5: swap jb -> je
+	echo "/0000ba0"       >> /tmp/switch14
+	echo ":s/82d4/84d4/"  >> /tmp/switch14
+	# line bbb: swap je -> jne
+	echo "/0000bb0"       >> /tmp/switch14
+	echo ":s/8424/8524/"  >> /tmp/switch14
+	# convert back to binary
+	echo ":%!xxd -r"      >> /tmp/switch14
+	echo ":wq"            >> /tmp/switch14
+	echo                  >> /tmp/switch14
+
+	chmod 644 /tmp/switch14
+fi
 
 # Execute vimscript on local copy of getflag
-vim -s /tmp/switchy /tmp/getflag
+vim -s /tmp/switch14 /tmp/getflag
 
 # Launch it
 /tmp/getflag
